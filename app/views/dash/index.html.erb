@@ -1,6 +1,24 @@
 <% provide(:title, 'Ruakura Club Beer Status') %>
 <section id="beer-list" class="cf">
-<%= render partial: 'beer_list' %>
+  <ul class="beer-list small-block-grid-1 medium-block-grid-2">
+    <% @beers.each do |beer| %>
+        <%= content_tag :li, '', class: beer.location.status.downcase do %>
+            <% if beer.format.handpull %>
+                <% if beer.handpull %>
+                    <%= image_tag('icons/handpull_on.png', class: "dash-handpull") %>
+                <% else %>
+                    <%= image_tag('icons/handpull_off.png', class: "dash-handpull") %>
+                <% end %>
+            <% end %>
+            <h2><%= beer.brewer.name %> <em><%= beer.name %></em></h2>
+            <%= beer.style.name %> &mdash;
+            <b><%= number_to_percentage(beer.abv, precision: 1) %> ABV</b><br />
+            <%= beer.brewer.location %><br />
+            Handle: <%= beer_price(beer, 500, :handle) %>
+            Benny: <%= beer_price(beer, 465, :benny) %>
+            Glass: <%= beer_price(beer, 300, :glass) %>
+            Half: <%= beer_price(beer, 285, :half) %>
+        <% end %>
+    <% end %>
+  </ul>
 </section>
-<div id="event_source_status" class="dash_identifier">
-</div>

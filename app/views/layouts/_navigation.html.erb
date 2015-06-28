@@ -1,23 +1,26 @@
-<%# navigation styled for Bootstrap 3.0 %>
 <% if signed_in? %>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<%= link_to 'Dashboard', root_path, class: 'navbar-brand' %> |
-			<% if signed_in? %>
-				<%= link_to 'Manage Beers', beers_path, class: 'navbar-brand' %> |
-				<%= link_to 'Manage Brewers', brewers_path, class: 'navbar-brand' %> |
-				<%= link_to 'Manage Users', users_path, class: 'navbar-brand' %> |
-				<%= link_to 'Sign Out', destroy_user_session_path, method: "delete", class: 'navbar-brand' %>
-			<% else %>
-				<%= link_to 'Admin', new_user_session_path, class: 'navbar-brand' %>
-			<% end %>
-		</div>
-		<div class="collapse navbar-collapse">
-			<ul class="nav navbar-nav">
-				<%= render 'layouts/navigation_links' %>
-			</ul>
-		</div>
-	</div>
+<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="/">RCC Clubfare</a></h1>
+    </li>
+    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li><%= link_to 'Dashboard', root_path %></li>
+      <li><%= link_to 'Manage Beers', beers_path %></li>
+      <li><%= link_to 'Manage Brewers', brewers_path %></li>
+    </ul>
+
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li><%= link_to 'Manage Users', users_path %></li>
+      <li><%= link_to 'Sign Out', destroy_user_session_path, method: "delete" %></li>
+    </ul>
+  </section>
 </nav>
 <% end %>
